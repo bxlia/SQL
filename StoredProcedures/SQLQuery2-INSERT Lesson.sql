@@ -2,7 +2,7 @@
 USE P_421_Import;
 
 GO
-CREATE PROCEDURE sp_InsertLesson
+ALTER PROCEDURE sp_InsertLesson
 		@group		AS INT,
 		@discipline AS SMALLINT,
 		@teacher	AS SMALLINT,
@@ -13,11 +13,15 @@ AS
 BEGIN
 		IF NOT EXISTS 
 		(SELECT lesson_id FROM Schedule WHERE [group]=@group AND [date]=@date AND [time]=@time)
+		AND NOT EXISTS
+		(SELECT lesson_id FROM Schedule WHERE teacher=@teacher AND [date]=@date AND [time]=@time)
+		BEGIN
+			INSERT Schedule
+					([group], discipline, teacher, [date], [time], spent)
+			VALUES		   
+					(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 
-		INSERT Schedule
-				([group], discipline, teacher, [date], [time], spent)
-		VALUES		   
-				(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0))
+			SET @lesson_number += 1;
+		END
 		SET @time			= DATEADD(MINUTE, 95, @time);
-		SET @lesson_number += 1;
 END
