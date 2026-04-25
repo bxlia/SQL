@@ -13,18 +13,13 @@ BEGIN
         SET @next_day = (@next_day % 7) + 1;
 
     RETURN @next_day;
+	--WHILE @next_day < 14
+	--BEGIN
+	--	IF (POWER(2, @next_day%7-1) & @learning_days) <> 0 RETURN @next_day%7+1;
+	--	SET @next_day+=1;
+	--END
+	--RETURN @next_day%7+1;
 END
-GO
 
-CREATE FUNCTION GetNextLearningDate(@date DATE, @group_name NVARCHAR(10)) RETURNS DATE
-AS
-BEGIN
-    DECLARE @next_date TINYINT = dbo.GetNextLearningDay(@date, @group_name);
-    
-    SET @date = DATEADD(DAY, 1, @date);
-    WHILE DATEPART(WEEKDAY, @date) != @next_date
-		SET @date = DATEADD(DAY, 1, @date);
 
-    RETURN @date;
-END
-GO
+
