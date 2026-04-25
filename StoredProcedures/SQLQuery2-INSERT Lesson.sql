@@ -21,7 +21,7 @@ BEGIN
 			VALUES		   
 					(@group, @discipline, @teacher, @date, @time, IIF(@date<GETDATE(),1,0));
 
-			SET @lesson_number += 1;
+			SET @lesson_number = @lesson_number + 1;
 		END
-		SET @time			= DATEADD(MINUTE, 95, @time);
+		SET @time = DATEADD(MINUTE, 95, @time);
 END
