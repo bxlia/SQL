@@ -3,7 +3,7 @@ USE P_421_Import;
 
 GO
 
-ALTER FUNCTION GetNextLearningDate(@date DATE, @group_name NVARCHAR(10)) RETURNS DATE
+ALTER FUNCTION GetNextLearningDate(@group_name NVARCHAR(10), @date DATE) RETURNS DATE
 AS
 BEGIN
     DECLARE @next_date TINYINT = dbo.GetNextLearningDay(@date, @group_name);

@@ -1,0 +1,10 @@
+--SQLQuery7-sp_SetAllHolidaysFor.sql
+USE P_421_Import;
+SET DATEFIRST 1;
+GO
+
+CREATE OR ALTER PROCEDURE sp_SetAAllHolidaysFor @year AS SMALLINT
+AS
+BEGIN
+	
+END
