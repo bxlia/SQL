@@ -8,4 +8,5 @@ SET DATEFIRST 1;
 
 --PRINT dbo.GetNewYearHolidaysStartDate(2026);
 --PRINT dbo.GetSummerHolidaysStartDate(2023);
-PRINT dbo.GetEasterDate(2026);
+--PRINT dbo.GetEasterDate(2026);
+PRINT dbo.GetHolidaysStartDate(2026, N'Летние%');
